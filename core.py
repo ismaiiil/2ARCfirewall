@@ -8,12 +8,14 @@ import json
 pcap = rdpcap(r'C:\Users\USER\Desktop\waza.pcapng') # user input path to cap file
 
 tests = [
+    {'TCPsport': 80},
     {'UDPdport': 58373},
     {'dst_ip': "52.20.100.49"},
     {'UDPdport': 63630},
     {'src_ip': "52.20.100.49"},
     {'UDPdport': 65129},
-    {'UDPsport': 63630}
+    {'UDPsport': 63630},
+    {'TCPdport': 80}
     ]  # user input for rule
 
 temp = []
@@ -64,7 +66,6 @@ for i in range(0,len(Rules)):
                     pass
             temp = alt
             alt = []
-
     elif "dst_ip" in Rules[i]:
         if temp == []:
             for pkt in pcap:
@@ -81,7 +82,6 @@ for i in range(0,len(Rules)):
                     pass
             temp = alt
             alt = []
-
     elif "UDPdport" in Rules[i]:
         if temp == []:
             for pkt in pcap:
@@ -111,6 +111,38 @@ for i in range(0,len(Rules)):
                 if pkt.haslayer(UDP) and pkt["UDP"].sport != Rules[i]["UDPsport"]:
                     alt.append(pkt)
                 elif not pkt.haslayer(UDP):
+                    alt.append(pkt)
+            temp = alt
+            alt = []
+    elif "TCPdport" in Rules[i]:
+        if temp == []:
+            for pkt in pcap:
+                if pkt.haslayer(TCP) and (pkt["TCP"].dport != Rules[i]["TCPdport"]):
+                    temp.append(pkt)
+                elif not pkt.haslayer(TCP):
+                    temp.append(pkt)
+            alt = []
+        else:
+            for pkt in temp:
+                if pkt.haslayer(TCP) and pkt["TCP"].dport != Rules[i]["TCPdport"]:
+                    alt.append(pkt)
+                elif not pkt.haslayer(TCP):
+                    alt.append(pkt)
+            temp = alt
+            alt = []
+    elif "TCPsport" in Rules[i]:
+        if temp == []:
+            for pkt in pcap:
+                if pkt.haslayer(TCP) and (pkt["TCP"].sport != Rules[i]["TCPsport"]):
+                    temp.append(pkt)
+                elif not pkt.haslayer(TCP):
+                    temp.append(pkt)
+            alt = []
+        else:
+            for pkt in temp:
+                if pkt.haslayer(TCP) and pkt["TCP"].sport != Rules[i]["TCPsport"]:
+                    alt.append(pkt)
+                elif not pkt.haslayer(TCP):
                     alt.append(pkt)
             temp = alt
             alt = []
