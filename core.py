@@ -8,10 +8,11 @@ import json
 pcap = rdpcap(r'C:\Users\USER\Desktop\waza.pcapng') # user input path to cap file
 
 tests = [
-    {'src_ip': "52.20.100.49"},
-    {'dst_ip': "52.20.100.49"},
     {'UDPdport': 58373},
-    {'UDPdport': 63630}
+    {'dst_ip': "52.20.100.49"},
+    {'UDPdport': 63630},
+    {'src_ip': "52.20.100.49"},
+    {'UDPdport': 65129}
     ]  # user input for rule
 
 temp = []
@@ -96,6 +97,8 @@ for i in range(0,len(Rules)):
                     alt.append(pkt)
             temp = alt
             alt = []
+
+
 
 
 for mod_pkt in temp:
