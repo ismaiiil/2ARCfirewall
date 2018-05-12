@@ -8,8 +8,8 @@ import json
 pcap = rdpcap(r'C:\Users\USER\Desktop\waza.pcapng') # user input path to cap file
 
 tests = [
-    # {'src_ip': "52.20.100.49"},
-    {'src_ip': "192.168.100.2"},
+    {'src_ip': "52.20.100.49"},
+    {'dst_ip': "52.20.100.49"},
     {'UDPdport': 58373},
     {'UDPdport': 63630}
     ]  # user input for rule
@@ -43,6 +43,7 @@ def write(packet):
 
 print(pcap[100]['UDP'].dport)
 
+print(pcap[100]['IP'].dst)
 
 for i in range(0,len(Rules)):
     if "src_ip" in Rules[i]:
@@ -62,32 +63,22 @@ for i in range(0,len(Rules)):
             temp = alt
             alt = []
 
-    # elif "protocol" in Rules[i]:
-    #     if Rules[i]["protocol"] == "UDP":
-    #         if temp == []:
-    #             for pkt in pcap:
-    #                 if not pkt.haslayer(UDP):
-    #                     temp.append(pkt)
-    #             alt = []
-    #         else:
-    #             for pkt in temp:
-    #                 if not pkt.haslayer(UDP):
-    #                     alt.append(pkt)
-    #             temp = alt
-    #             alt = []
-    #     elif Rules[i]["protocol"] == "TCP":
-    #         if temp == []:
-    #             for pkt in pcap:
-    #                 if not pkt.haslayer(TCP):
-    #                     temp.append(pkt)
-    #             alt = []
-    #         else:
-    #             for pkt in temp:
-    #                 if not pkt.haslayer(TCP):
-    #                     alt.append(pkt)
-    #             temp = alt
-    #             alt = []
-    #  #  will not be implemented because blocking all udp ports is not useful
+    elif "dst_ip" in Rules[i]:
+        if temp == []:
+            for pkt in pcap:
+                if pkt.haslayer(IP) and pkt['IP'].dst != Rules[i]['dst_ip']:  # filters out the has_layer
+                    temp.append(pkt)  # sends the packet to be written if it meets criteria
+                else:
+                    pass
+            alt = []
+        else:
+            for pkt in temp:
+                if pkt.haslayer(IP) and pkt['IP'].dst != Rules[i]['dst_ip']:  # filters out the has_layer
+                    alt.append(pkt)  # sends the packet to be written if it meets criteria
+                else:
+                    pass
+            temp = alt
+            alt = []
 
     elif "UDPdport" in Rules[i]:
         if temp == []:
@@ -107,27 +98,6 @@ for i in range(0,len(Rules)):
             alt = []
 
 
-
-
-
-
-# for pkt in pcap:
-#     if pkt.haslayer(IP) and pkt['IP'].src != Rules['src_ip']:  # filters out the has_layer
-#         temp.append(pkt)  # sends the packet to be written if it meets criteria
-#     else:
-#         pass
-#
-#
-# for pkt in pcap:
-#     if 'protocol' in Rules:
-#         if not pkt.haslayer(UDP):
-#             if pkt not in temp:
-#                 temp.append(pkt)
-#             else:
-#                 pass
-#         else:
-#             pass
-
 for mod_pkt in temp:
     write(mod_pkt)
 
@@ -145,3 +115,46 @@ open('filtered.pcap', 'w').close()
 
 
 # dest 58373
+
+# elif "protocol" in Rules[i]:
+#     if Rules[i]["protocol"] == "UDP":
+#         if temp == []:
+#             for pkt in pcap:
+#                 if not pkt.haslayer(UDP):
+#                     temp.append(pkt)
+#             alt = []
+#         else:
+#             for pkt in temp:
+#                 if not pkt.haslayer(UDP):
+#                     alt.append(pkt)
+#             temp = alt
+#             alt = []
+#     elif Rules[i]["protocol"] == "TCP":
+#         if temp == []:
+#             for pkt in pcap:
+#                 if not pkt.haslayer(TCP):
+#                     temp.append(pkt)
+#             alt = []
+#         else:
+#             for pkt in temp:
+#                 if not pkt.haslayer(TCP):
+#                     alt.append(pkt)
+#             temp = alt
+#             alt = []
+#  #  will not be implemented because blocking all udp ports is not useful
+# for pkt in pcap:
+#     if pkt.haslayer(IP) and pkt['IP'].src != Rules['src_ip']:  # filters out the has_layer
+#         temp.append(pkt)  # sends the packet to be written if it meets criteria
+#     else:
+#         pass
+#
+#
+# for pkt in pcap:
+#     if 'protocol' in Rules:
+#         if not pkt.haslayer(UDP):
+#             if pkt not in temp:
+#                 temp.append(pkt)
+#             else:
+#                 pass
+#         else:
+#             pass
