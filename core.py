@@ -9,9 +9,10 @@ pcap = rdpcap(r'C:\Users\USER\Desktop\waza.pcapng') # user input path to cap fil
 
 tests = [
     # {'src_ip': "52.20.100.49"},
+    {'src_ip': "192.168.100.2"},
     {'UDPdport': 58373},
-    {'UDPdport': 63630},
-    {'src_ip': "192.168.100.2"}]  # user input for rule
+    {'UDPdport': 63630}
+    ]  # user input for rule
 
 temp = []
 alt = []
@@ -93,10 +94,14 @@ for i in range(0,len(Rules)):
             for pkt in pcap:
                 if pkt.haslayer(UDP) and (pkt["UDP"].dport != Rules[i]["UDPdport"]):
                     temp.append(pkt)
+                elif not pkt.haslayer(UDP):
+                    temp.append(pkt)
             alt = []
         else:
             for pkt in temp:
                 if pkt.haslayer(UDP) and pkt["UDP"].dport != Rules[i]["UDPdport"]:
+                    alt.append(pkt)
+                elif not pkt.haslayer(UDP):
                     alt.append(pkt)
             temp = alt
             alt = []
