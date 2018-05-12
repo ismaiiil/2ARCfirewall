@@ -13,6 +13,7 @@ tests = [
     {'dst_ip': "52.20.100.49"},
     {'UDPdport': 63630},
     {'src_ip': "52.20.100.49"},
+    {'dst_MAC': "c8:ff:28:2c:71:d7"},
     {'UDPdport': 65129},
     {'UDPsport': 63630},
     {'TCPdport': 80}
@@ -48,6 +49,8 @@ def write(packet):
 print(pcap[100]['UDP'].dport)
 
 print(pcap[100]['IP'].dst)
+
+print(pcap[100]['Ethernet'].src)
 
 for i in range(0,len(Rules)):
     if "src_ip" in Rules[i]:
@@ -146,8 +149,38 @@ for i in range(0,len(Rules)):
                     alt.append(pkt)
             temp = alt
             alt = []
-
-
+    elif "src_MAC" in Rules[i]:
+        if temp == []:
+            for pkt in pcap:
+                if pkt['Ethernet'].src != Rules[i]['src_MAC']:  # filters out the has_layer
+                    temp.append(pkt)  # sends the packet to be written if it meets criteria
+                else:
+                    pass
+            alt = []
+        else:
+            for pkt in temp:
+                if pkt['Ethernet'].src != Rules[i]['src_MAC']:  # filters out the has_layer
+                    alt.append(pkt)  # sends the packet to be written if it meets criteria
+                else:
+                    pass
+            temp = alt
+            alt = []
+    elif "dst_MAC" in Rules[i]:
+        if temp == []:
+            for pkt in pcap:
+                if pkt['Ethernet'].dst != Rules[i]['dst_MAC']:  # filters out the has_layer
+                    temp.append(pkt)  # sends the packet to be written if it meets criteria
+                else:
+                    pass
+            alt = []
+        else:
+            for pkt in temp:
+                if pkt['Ethernet'].dst != Rules[i]['dst_MAC']:  # filters out the has_layer
+                    alt.append(pkt)  # sends the packet to be written if it meets criteria
+                else:
+                    pass
+            temp = alt
+            alt = []
 
 
 for mod_pkt in temp:
