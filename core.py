@@ -12,7 +12,8 @@ tests = [
     {'dst_ip': "52.20.100.49"},
     {'UDPdport': 63630},
     {'src_ip': "52.20.100.49"},
-    {'UDPdport': 65129}
+    {'UDPdport': 65129},
+    {'UDPsport': 63630}
     ]  # user input for rule
 
 temp = []
@@ -92,6 +93,22 @@ for i in range(0,len(Rules)):
         else:
             for pkt in temp:
                 if pkt.haslayer(UDP) and pkt["UDP"].dport != Rules[i]["UDPdport"]:
+                    alt.append(pkt)
+                elif not pkt.haslayer(UDP):
+                    alt.append(pkt)
+            temp = alt
+            alt = []
+    elif "UDPsport" in Rules[i]:
+        if temp == []:
+            for pkt in pcap:
+                if pkt.haslayer(UDP) and (pkt["UDP"].sport != Rules[i]["UDPsport"]):
+                    temp.append(pkt)
+                elif not pkt.haslayer(UDP):
+                    temp.append(pkt)
+            alt = []
+        else:
+            for pkt in temp:
+                if pkt.haslayer(UDP) and pkt["UDP"].sport != Rules[i]["UDPsport"]:
                     alt.append(pkt)
                 elif not pkt.haslayer(UDP):
                     alt.append(pkt)
