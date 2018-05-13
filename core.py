@@ -4,190 +4,210 @@ from scapy.layers.inet import *
 from scapy.all import *
 from scapy.all import wrpcap
 import json
+import argparse
+import sys
 
-pcap = rdpcap(r'C:\Users\USER\Desktop\waza.pcapng') # user input path to cap file
+parser = argparse.ArgumentParser(description='Assigns a keyword rule to a value')
 
-tests = [
-    {'TCPsport': 80},
-    {'UDPdport': 58373},
-    {'dst_ip': "52.20.100.49"},
-    {'UDPdport': 63630},
-    {'src_ip': "52.20.100.49"},
-    {'dst_MAC': "c8:ff:28:2c:71:d7"},
-    {'UDPdport': 65129},
-    {'UDPsport': 63630},
-    {'TCPdport': 80}
-    ]  # user input for rule
-
-temp = []
-alt = []
+my_dict = {}
 
 
-# protocol : TCP, UDP TODO:add more protocols
-#   if it is TCP, filter out all TCP ports
-#   and vice versa
-
-# print(tests)
-
-f = open("rules", 'w')
-json.dump(tests, f)
-f.close()
-
-# save user input for rules to JSON file
-
-g = open("rules")
-Rules = json.load(g)
-g.close()
-print(Rules)
-# load JSON file into THIS
+class StoreDictKeyPair(argparse.Action):
+    def __call__(self, parser, namespace, values, option_string=None):
+        for kv in values.split(","):
+            k, v = kv.split("=")
+            my_dict[k] = v
+        setattr(namespace, self.dest, my_dict)
 
 
-def write(packet):
-    wrpcap('filtered.pcap', packet, append=True)
+h = "add a rule: src_ip,dst_ip,TCPsport,UDPsport,TCPdport,TCPdport,dst_MAC,src_MAC"
+
+parser.add_argument("--ADD", help=h, dest="ADD", action=StoreDictKeyPair, metavar="add rule:")
+parser.add_argument("--DELETE", type=int, help="delete rule")
+parser.add_argument("--DISPLAY", help="display table of rules")
+parser.add_argument("--FILTER", help="filters packet file to filtered.pcap")
+args = parser.parse_args()
+
+if args.DELETE is not None:
+    get_rules = open("rules")
+    loadedRules = json.load(get_rules)
+    get_rules.close()
+    del loadedRules[args.DELETE]
+    f = open("rules", 'w')
+    json.dump(loadedRules, f)
+    f.close()
+if args.ADD is not None:
+    get_rules = open("rules")
+    loadedRules = json.load(get_rules)
+    get_rules.close()
+    loadedRules.append(my_dict)
+
+    f = open("rules", 'w')
+    json.dump(loadedRules, f)
+    f.close()
+if args.DISPLAY == "table":
+    get_rules = open("rules")
+    loadedRules = json.load(get_rules)
+    get_rules.close()
+
+    for i in range(0, len(loadedRules)):
+        print(str(i) + " " + str(loadedRules[i]))
+if args.FILTER is not None:
+    pcap = rdpcap(args.FILTER)  # user input path to cap file
+
+    temp = []
+    alt = []
+
+    g = open("rules")
+    Rules = json.load(g)
+    g.close()
+    print(Rules)
+
+    # load JSON file into THIS
+
+    def write(packet):
+        wrpcap('filtered.pcap', packet, append=True)
+
+    for i in range(0, len(Rules)):
+        if "src_ip" in Rules[i]:
+            if temp == []:
+                for pkt in pcap:
+                    if pkt.haslayer(IP) and pkt['IP'].src != Rules[i]['src_ip']:  # filters out the has_layer
+                        temp.append(pkt)  # sends the packet to be written if it meets criteria
+                    else:
+                        pass
+                alt = []
+            else:
+                for pkt in temp:
+                    if pkt.haslayer(IP) and pkt['IP'].src != Rules[i]['src_ip']:  # filters out the has_layer
+                        alt.append(pkt)  # sends the packet to be written if it meets criteria
+                    else:
+                        pass
+                temp = alt
+                alt = []
+        elif "dst_ip" in Rules[i]:
+            if temp == []:
+                for pkt in pcap:
+                    if pkt.haslayer(IP) and pkt['IP'].dst != Rules[i]['dst_ip']:  # filters out the has_layer
+                        temp.append(pkt)  # sends the packet to be written if it meets criteria
+                    else:
+                        pass
+                alt = []
+            else:
+                for pkt in temp:
+                    if pkt.haslayer(IP) and pkt['IP'].dst != Rules[i]['dst_ip']:  # filters out the has_layer
+                        alt.append(pkt)  # sends the packet to be written if it meets criteria
+                    else:
+                        pass
+                temp = alt
+                alt = []
+        elif "UDPdport" in Rules[i]:
+            if temp == []:
+                for pkt in pcap:
+                    if pkt.haslayer(UDP) and (pkt["UDP"].dport != Rules[i]["UDPdport"]):
+                        temp.append(pkt)
+                    elif not pkt.haslayer(UDP):
+                        temp.append(pkt)
+                alt = []
+            else:
+                for pkt in temp:
+                    if pkt.haslayer(UDP) and pkt["UDP"].dport != Rules[i]["UDPdport"]:
+                        alt.append(pkt)
+                    elif not pkt.haslayer(UDP):
+                        alt.append(pkt)
+                temp = alt
+                alt = []
+        elif "UDPsport" in Rules[i]:
+            if temp == []:
+                for pkt in pcap:
+                    if pkt.haslayer(UDP) and (pkt["UDP"].sport != Rules[i]["UDPsport"]):
+                        temp.append(pkt)
+                    elif not pkt.haslayer(UDP):
+                        temp.append(pkt)
+                alt = []
+            else:
+                for pkt in temp:
+                    if pkt.haslayer(UDP) and pkt["UDP"].sport != Rules[i]["UDPsport"]:
+                        alt.append(pkt)
+                    elif not pkt.haslayer(UDP):
+                        alt.append(pkt)
+                temp = alt
+                alt = []
+        elif "TCPdport" in Rules[i]:
+            if temp == []:
+                for pkt in pcap:
+                    if pkt.haslayer(TCP) and (pkt["TCP"].dport != Rules[i]["TCPdport"]):
+                        temp.append(pkt)
+                    elif not pkt.haslayer(TCP):
+                        temp.append(pkt)
+                alt = []
+            else:
+                for pkt in temp:
+                    if pkt.haslayer(TCP) and pkt["TCP"].dport != Rules[i]["TCPdport"]:
+                        alt.append(pkt)
+                    elif not pkt.haslayer(TCP):
+                        alt.append(pkt)
+                temp = alt
+                alt = []
+        elif "TCPsport" in Rules[i]:
+            if temp == []:
+                for pkt in pcap:
+                    if pkt.haslayer(TCP) and (pkt["TCP"].sport != Rules[i]["TCPsport"]):
+                        temp.append(pkt)
+                    elif not pkt.haslayer(TCP):
+                        temp.append(pkt)
+                alt = []
+            else:
+                for pkt in temp:
+                    if pkt.haslayer(TCP) and pkt["TCP"].sport != Rules[i]["TCPsport"]:
+                        alt.append(pkt)
+                    elif not pkt.haslayer(TCP):
+                        alt.append(pkt)
+                temp = alt
+                alt = []
+        elif "src_MAC" in Rules[i]:
+            if temp == []:
+                for pkt in pcap:
+                    if pkt['Ethernet'].src != Rules[i]['src_MAC']:  # filters out the has_layer
+                        temp.append(pkt)  # sends the packet to be written if it meets criteria
+                    else:
+                        pass
+                alt = []
+            else:
+                for pkt in temp:
+                    if pkt['Ethernet'].src != Rules[i]['src_MAC']:  # filters out the has_layer
+                        alt.append(pkt)  # sends the packet to be written if it meets criteria
+                    else:
+                        pass
+                temp = alt
+                alt = []
+        elif "dst_MAC" in Rules[i]:
+            if temp == []:
+                for pkt in pcap:
+                    if pkt['Ethernet'].dst != Rules[i]['dst_MAC']:  # filters out the has_layer
+                        temp.append(pkt)  # sends the packet to be written if it meets criteria
+                    else:
+                        pass
+                alt = []
+            else:
+                for pkt in temp:
+                    if pkt['Ethernet'].dst != Rules[i]['dst_MAC']:  # filters out the has_layer
+                        alt.append(pkt)  # sends the packet to be written if it meets criteria
+                    else:
+                        pass
+                temp = alt
+                alt = []
+
+    for mod_pkt in temp:
+        write(mod_pkt)
+
+    input("press enter to clear fileterd.pcap")
+    open('filtered.pcap', 'w').close()
+
+print(args)
 
 
-print(pcap[100]['UDP'].dport)
-
-print(pcap[100]['IP'].dst)
-
-print(pcap[100]['Ethernet'].src)
-
-for i in range(0,len(Rules)):
-    if "src_ip" in Rules[i]:
-        if temp == []:
-            for pkt in pcap:
-                if pkt.haslayer(IP) and pkt['IP'].src != Rules[i]['src_ip']:  # filters out the has_layer
-                    temp.append(pkt)  # sends the packet to be written if it meets criteria
-                else:
-                    pass
-            alt = []
-        else:
-            for pkt in temp:
-                if pkt.haslayer(IP) and pkt['IP'].src != Rules[i]['src_ip']:  # filters out the has_layer
-                    alt.append(pkt)  # sends the packet to be written if it meets criteria
-                else:
-                    pass
-            temp = alt
-            alt = []
-    elif "dst_ip" in Rules[i]:
-        if temp == []:
-            for pkt in pcap:
-                if pkt.haslayer(IP) and pkt['IP'].dst != Rules[i]['dst_ip']:  # filters out the has_layer
-                    temp.append(pkt)  # sends the packet to be written if it meets criteria
-                else:
-                    pass
-            alt = []
-        else:
-            for pkt in temp:
-                if pkt.haslayer(IP) and pkt['IP'].dst != Rules[i]['dst_ip']:  # filters out the has_layer
-                    alt.append(pkt)  # sends the packet to be written if it meets criteria
-                else:
-                    pass
-            temp = alt
-            alt = []
-    elif "UDPdport" in Rules[i]:
-        if temp == []:
-            for pkt in pcap:
-                if pkt.haslayer(UDP) and (pkt["UDP"].dport != Rules[i]["UDPdport"]):
-                    temp.append(pkt)
-                elif not pkt.haslayer(UDP):
-                    temp.append(pkt)
-            alt = []
-        else:
-            for pkt in temp:
-                if pkt.haslayer(UDP) and pkt["UDP"].dport != Rules[i]["UDPdport"]:
-                    alt.append(pkt)
-                elif not pkt.haslayer(UDP):
-                    alt.append(pkt)
-            temp = alt
-            alt = []
-    elif "UDPsport" in Rules[i]:
-        if temp == []:
-            for pkt in pcap:
-                if pkt.haslayer(UDP) and (pkt["UDP"].sport != Rules[i]["UDPsport"]):
-                    temp.append(pkt)
-                elif not pkt.haslayer(UDP):
-                    temp.append(pkt)
-            alt = []
-        else:
-            for pkt in temp:
-                if pkt.haslayer(UDP) and pkt["UDP"].sport != Rules[i]["UDPsport"]:
-                    alt.append(pkt)
-                elif not pkt.haslayer(UDP):
-                    alt.append(pkt)
-            temp = alt
-            alt = []
-    elif "TCPdport" in Rules[i]:
-        if temp == []:
-            for pkt in pcap:
-                if pkt.haslayer(TCP) and (pkt["TCP"].dport != Rules[i]["TCPdport"]):
-                    temp.append(pkt)
-                elif not pkt.haslayer(TCP):
-                    temp.append(pkt)
-            alt = []
-        else:
-            for pkt in temp:
-                if pkt.haslayer(TCP) and pkt["TCP"].dport != Rules[i]["TCPdport"]:
-                    alt.append(pkt)
-                elif not pkt.haslayer(TCP):
-                    alt.append(pkt)
-            temp = alt
-            alt = []
-    elif "TCPsport" in Rules[i]:
-        if temp == []:
-            for pkt in pcap:
-                if pkt.haslayer(TCP) and (pkt["TCP"].sport != Rules[i]["TCPsport"]):
-                    temp.append(pkt)
-                elif not pkt.haslayer(TCP):
-                    temp.append(pkt)
-            alt = []
-        else:
-            for pkt in temp:
-                if pkt.haslayer(TCP) and pkt["TCP"].sport != Rules[i]["TCPsport"]:
-                    alt.append(pkt)
-                elif not pkt.haslayer(TCP):
-                    alt.append(pkt)
-            temp = alt
-            alt = []
-    elif "src_MAC" in Rules[i]:
-        if temp == []:
-            for pkt in pcap:
-                if pkt['Ethernet'].src != Rules[i]['src_MAC']:  # filters out the has_layer
-                    temp.append(pkt)  # sends the packet to be written if it meets criteria
-                else:
-                    pass
-            alt = []
-        else:
-            for pkt in temp:
-                if pkt['Ethernet'].src != Rules[i]['src_MAC']:  # filters out the has_layer
-                    alt.append(pkt)  # sends the packet to be written if it meets criteria
-                else:
-                    pass
-            temp = alt
-            alt = []
-    elif "dst_MAC" in Rules[i]:
-        if temp == []:
-            for pkt in pcap:
-                if pkt['Ethernet'].dst != Rules[i]['dst_MAC']:  # filters out the has_layer
-                    temp.append(pkt)  # sends the packet to be written if it meets criteria
-                else:
-                    pass
-            alt = []
-        else:
-            for pkt in temp:
-                if pkt['Ethernet'].dst != Rules[i]['dst_MAC']:  # filters out the has_layer
-                    alt.append(pkt)  # sends the packet to be written if it meets criteria
-                else:
-                    pass
-            temp = alt
-            alt = []
-
-
-for mod_pkt in temp:
-    write(mod_pkt)
-
-input("press enter to clear fileterd.pcap")
-open('filtered.pcap', 'w').close()
+# slel='C:\Users\USER\Desktop\waza.pcapng'
 
 
 # template = {'src_ip': "192.168.0.2",
@@ -195,51 +215,5 @@ open('filtered.pcap', 'w').close()
 #          'protocol': "UDP",
 #          'TCPsport': 58837, or UDPsport :80
 #          'TCPdport': 56646, or UDPdport : 80
-#          'dst_mac': "10:51:72:5f:34:5b",
-#          'src_mac': "c8:ff:28:2c:71:d7"}
-
-
-# dest 58373
-
-# elif "protocol" in Rules[i]:
-#     if Rules[i]["protocol"] == "UDP":
-#         if temp == []:
-#             for pkt in pcap:
-#                 if not pkt.haslayer(UDP):
-#                     temp.append(pkt)
-#             alt = []
-#         else:
-#             for pkt in temp:
-#                 if not pkt.haslayer(UDP):
-#                     alt.append(pkt)
-#             temp = alt
-#             alt = []
-#     elif Rules[i]["protocol"] == "TCP":
-#         if temp == []:
-#             for pkt in pcap:
-#                 if not pkt.haslayer(TCP):
-#                     temp.append(pkt)
-#             alt = []
-#         else:
-#             for pkt in temp:
-#                 if not pkt.haslayer(TCP):
-#                     alt.append(pkt)
-#             temp = alt
-#             alt = []
-#  #  will not be implemented because blocking all udp ports is not useful
-# for pkt in pcap:
-#     if pkt.haslayer(IP) and pkt['IP'].src != Rules['src_ip']:  # filters out the has_layer
-#         temp.append(pkt)  # sends the packet to be written if it meets criteria
-#     else:
-#         pass
-#
-#
-# for pkt in pcap:
-#     if 'protocol' in Rules:
-#         if not pkt.haslayer(UDP):
-#             if pkt not in temp:
-#                 temp.append(pkt)
-#             else:
-#                 pass
-#         else:
-#             pass
+#          'dst_MAC': "10:51:72:5f:34:5b",
+#          'src_MAC': "c8:ff:28:2c:71:d7"}
