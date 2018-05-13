@@ -1,0 +1,25 @@
+options:
+
+--ADD:
+choose from these rules: src_ip,dst_ip,TCPsport,UDPsport,TCPdport,TCPdport,dst_MAC,src_MAC
+example:
+input: python core.py --ADD src_ip=192.168.0.2
+this will add the rule src_ip=192.168.0.2 to the rule JSON file
+
+--DELETE:
+delete a rule by index:
+example:
+input: python core.py --DELETE 1
+this will delete rule with index 1
+
+--DISPLAY:
+display table:
+example:
+input: python core.py --DISPLAY table
+this will output all rules stored to rules JSON file
+
+--FILTER:
+Filter file pointed by path input by user:
+example:
+input: python core.py --FILTER C:\Users\USER\Desktop\waza.pcapng
+

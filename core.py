@@ -61,7 +61,6 @@ if args.FILTER is not None:
     g = open("rules")
     Rules = json.load(g)
     g.close()
-    print(Rules)
 
     # load JSON file into THIS
 
@@ -198,14 +197,13 @@ if args.FILTER is not None:
                 temp = alt
                 alt = []
 
+
+
     for mod_pkt in temp:
         write(mod_pkt)
 
     input("press enter to clear fileterd.pcap")
     open('filtered.pcap', 'w').close()
-
-print(args)
-
 
 # slel='C:\Users\USER\Desktop\waza.pcapng'
 

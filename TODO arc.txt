@@ -1,0 +1,22 @@
+1.read a .cap file
+	-The program can parse rules in a natural language.
+	filter by ip
+	filter by protocol(TCP,UDP,DNS) //TODO find ways to get more protocols
+2.based on filter logic, example, ip , protocol, etc, add a new list of packets to a new
+pcap file
+
+3.make python file an exe that can parse arguments? maybe not,
+without exe: filter.py -t arg1 -s arg2
+with exe: filter -t arg1 -s arg2 (plus user doesnt need to have installed python for app to work)
+
+-procedural natural input
+
+	-user choose outbound or inbound rule(if outbound filter out all src-ip == local-ip)
+	(if inbound filter all dest-ip == local-ip)
+	-ask user to put name of rule(optional, if each rule has an id)
+	-store rules in a text file, app will read text file to execute either on pcap or         network
+	-request user location of capture
+	(store capture in a list)
+
+
+	
