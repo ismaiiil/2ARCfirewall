@@ -18,5 +18,5 @@ with exe: filter -t arg1 -s arg2 (plus user doesnt need to have installed python
 	-request user location of capture
 	(store capture in a list)
 
-
+TODO find a way to be able to distinguisih between outgoing and incoming packets, rightnow rules aplly for both incoming and outgoing packets
 	
