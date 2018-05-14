@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ac8e309e-341c-4b49-94cc-0fd2bb624467" name="Default" comment="todo">
+    <list default="true" id="ac8e309e-341c-4b49-94cc-0fd2bb624467" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TODO arc.txt" afterPath="$PROJECT_DIR$/TODO arc.txt" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -207,6 +206,14 @@
       <option name="presentableId" value="Default" />
       <updated>1526057327228</updated>
     </task>
+    <task id="LOCAL-00001" summary="todo">
+      <created>1526337201259</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1526337201259</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
