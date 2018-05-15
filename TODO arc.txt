@@ -19,4 +19,7 @@ with exe: filter -t arg1 -s arg2 (plus user doesnt need to have installed python
 	(store capture in a list)
 
 TODO find a way to be able to distinguisih between outgoing and incoming packets, rightnow rules aplly for both incoming and outgoing packets
-	
+	https://stackoverflow.com/questions/24664893/python-scapy-sniff-only-incoming-packets?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
+TODO implement icmp protocol rule to block according to rules:
+    http://www.informit.com/articles/article.aspx?p=26557&seqNum=5
+TODO mac address filtering is not possible with PYdivert, for now...
