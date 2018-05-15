@@ -151,7 +151,7 @@ if (args.FILTER is not None) and (args.MAC is not None):
             if temp == []:
                 for pkt in pcap:
                     if not isOutgoing(pkt):
-                        if pkt.haslayer(UDP) and (pkt["UDP"].dport != InRules[i]["UDPdport"]):
+                        if pkt.haslayer(UDP) and (pkt["UDP"].dport != int(InRules[i]["UDPdport"])):
                             temp.append(pkt)
                         elif not pkt.haslayer(UDP):
                             temp.append(pkt)
@@ -159,7 +159,7 @@ if (args.FILTER is not None) and (args.MAC is not None):
             else:
                 for pkt in temp:
                     if not isOutgoing(pkt):
-                        if pkt.haslayer(UDP) and pkt["UDP"].dport != InRules[i]["UDPdport"]:
+                        if pkt.haslayer(UDP) and pkt["UDP"].dport != int(InRules[i]["UDPdport"]):
                             alt.append(pkt)
                         elif not pkt.haslayer(UDP):
                             alt.append(pkt)
@@ -169,7 +169,7 @@ if (args.FILTER is not None) and (args.MAC is not None):
             if temp == []:
                 for pkt in pcap:
                     if not isOutgoing(pkt):
-                        if pkt.haslayer(UDP) and (pkt["UDP"].sport != InRules[i]["UDPsport"]):
+                        if pkt.haslayer(UDP) and (pkt["UDP"].sport != int(InRules[i]["UDPsport"])):
                             temp.append(pkt)
                         elif not pkt.haslayer(UDP):
                             temp.append(pkt)
@@ -177,7 +177,7 @@ if (args.FILTER is not None) and (args.MAC is not None):
             else:
                 for pkt in temp:
                     if not isOutgoing(pkt):
-                        if pkt.haslayer(UDP) and pkt["UDP"].sport != InRules[i]["UDPsport"]:
+                        if pkt.haslayer(UDP) and pkt["UDP"].sport != int(InRules[i]["UDPsport"]):
                             alt.append(pkt)
                         elif not pkt.haslayer(UDP):
                             alt.append(pkt)
@@ -187,7 +187,7 @@ if (args.FILTER is not None) and (args.MAC is not None):
             if temp == []:
                 for pkt in pcap:
                     if not isOutgoing(pkt):
-                        if pkt.haslayer(TCP) and (pkt["TCP"].dport != InRules[i]["TCPdport"]):
+                        if pkt.haslayer(TCP) and (pkt["TCP"].dport != int(InRules[i]["TCPdport"])):
                             temp.append(pkt)
                         elif not pkt.haslayer(TCP):
                             temp.append(pkt)
@@ -195,7 +195,7 @@ if (args.FILTER is not None) and (args.MAC is not None):
             else:
                 for pkt in temp:
                     if not isOutgoing(pkt):
-                        if pkt.haslayer(TCP) and pkt["TCP"].dport != InRules[i]["TCPdport"]:
+                        if pkt.haslayer(TCP) and pkt["TCP"].dport != int(InRules[i]["TCPdport"]):
                             alt.append(pkt)
                         elif not pkt.haslayer(TCP):
                             alt.append(pkt)
@@ -205,7 +205,7 @@ if (args.FILTER is not None) and (args.MAC is not None):
             if temp == []:
                 for pkt in pcap:
                     if not isOutgoing(pkt):
-                        if pkt.haslayer(TCP) and (pkt["TCP"].sport != InRules[i]["TCPsport"]):
+                        if pkt.haslayer(TCP) and (pkt["TCP"].sport != int(InRules[i]["TCPsport"])):
                             temp.append(pkt)
                         elif not pkt.haslayer(TCP):
                             temp.append(pkt)
@@ -213,7 +213,7 @@ if (args.FILTER is not None) and (args.MAC is not None):
             else:
                 for pkt in temp:
                     if not isOutgoing(pkt):
-                        if pkt.haslayer(TCP) and pkt["TCP"].sport != InRules[i]["TCPsport"]:
+                        if pkt.haslayer(TCP) and pkt["TCP"].sport != int(InRules[i]["TCPsport"]):
                             alt.append(pkt)
                         elif not pkt.haslayer(TCP):
                             alt.append(pkt)
@@ -259,7 +259,7 @@ if (args.FILTER is not None) and (args.MAC is not None):
             if temp == []:
                 for pkt in pcap:
                     if not isOutgoing(pkt):
-                        if pkt.haslayer(ICMP) and (pkt["ICMP"].code != InRules[i]["icmp"]):
+                        if pkt.haslayer(ICMP) and (pkt["ICMP"].code != int(InRules[i]["icmp"])):
                             temp.append(pkt)
                         elif not pkt.haslayer(ICMP):
                             temp.append(pkt)
@@ -267,7 +267,7 @@ if (args.FILTER is not None) and (args.MAC is not None):
             else:
                 for pkt in temp:
                     if not isOutgoing(pkt):
-                        if pkt.haslayer(ICMP) and pkt["ICMP"].code != InRules[i]["icmp"]:
+                        if pkt.haslayer(ICMP) and pkt["ICMP"].code != int(InRules[i]["icmp"]):
                             alt.append(pkt)
                         elif not pkt.haslayer(ICMP):
                             alt.append(pkt)
@@ -332,7 +332,7 @@ if (args.FILTER is not None) and (args.MAC is not None):
             if temp == []:
                 for pkt in pcap:
                     if isOutgoing(pkt):
-                        if pkt.haslayer(UDP) and (pkt["UDP"].dport != OutRules[i]["UDPdport"]):
+                        if pkt.haslayer(UDP) and (pkt["UDP"].dport != int(OutRules[i]["UDPdport"])):
                             temp.append(pkt)
                         elif not pkt.haslayer(UDP):
                             temp.append(pkt)
@@ -340,7 +340,7 @@ if (args.FILTER is not None) and (args.MAC is not None):
             else:
                 for pkt in temp:
                     if isOutgoing(pkt):
-                        if pkt.haslayer(UDP) and pkt["UDP"].dport != OutRules[i]["UDPdport"]:
+                        if pkt.haslayer(UDP) and pkt["UDP"].dport != int(OutRules[i]["UDPdport"]):
                             alt.append(pkt)
                         elif not pkt.haslayer(UDP):
                             alt.append(pkt)
@@ -350,7 +350,7 @@ if (args.FILTER is not None) and (args.MAC is not None):
             if temp == []:
                 for pkt in pcap:
                     if isOutgoing(pkt):
-                        if pkt.haslayer(UDP) and (pkt["UDP"].sport != OutRules[i]["UDPsport"]):
+                        if pkt.haslayer(UDP) and (pkt["UDP"].sport != int(OutRules[i]["UDPsport"])):
                             temp.append(pkt)
                         elif not pkt.haslayer(UDP):
                             temp.append(pkt)
@@ -358,7 +358,7 @@ if (args.FILTER is not None) and (args.MAC is not None):
             else:
                 for pkt in temp:
                     if isOutgoing(pkt):
-                        if pkt.haslayer(UDP) and pkt["UDP"].sport != OutRules[i]["UDPsport"]:
+                        if pkt.haslayer(UDP) and pkt["UDP"].sport != int(OutRules[i]["UDPsport"]):
                             alt.append(pkt)
                         elif not pkt.haslayer(UDP):
                             alt.append(pkt)
@@ -368,7 +368,7 @@ if (args.FILTER is not None) and (args.MAC is not None):
             if temp == []:
                 for pkt in pcap:
                     if isOutgoing(pkt):
-                        if pkt.haslayer(TCP) and (pkt["TCP"].dport != OutRules[i]["TCPdport"]):
+                        if pkt.haslayer(TCP) and (pkt["TCP"].dport != int(OutRules[i]["TCPdport"])):
                             temp.append(pkt)
                         elif not pkt.haslayer(TCP):
                             temp.append(pkt)
@@ -376,7 +376,7 @@ if (args.FILTER is not None) and (args.MAC is not None):
             else:
                 for pkt in temp:
                     if isOutgoing(pkt):
-                        if pkt.haslayer(TCP) and pkt["TCP"].dport != OutRules[i]["TCPdport"]:
+                        if pkt.haslayer(TCP) and pkt["TCP"].dport != int(OutRules[i]["TCPdport"]):
                             alt.append(pkt)
                         elif not pkt.haslayer(TCP):
                             alt.append(pkt)
@@ -386,7 +386,7 @@ if (args.FILTER is not None) and (args.MAC is not None):
             if temp == []:
                 for pkt in pcap:
                     if isOutgoing(pkt):
-                        if pkt.haslayer(TCP) and (pkt["TCP"].sport != OutRules[i]["TCPsport"]):
+                        if pkt.haslayer(TCP) and (pkt["TCP"].sport != int(OutRules[i]["TCPsport"])):
                             temp.append(pkt)
                         elif not pkt.haslayer(TCP):
                             temp.append(pkt)
@@ -394,7 +394,7 @@ if (args.FILTER is not None) and (args.MAC is not None):
             else:
                 for pkt in temp:
                     if isOutgoing(pkt):
-                        if pkt.haslayer(TCP) and pkt["TCP"].sport != OutRules[i]["TCPsport"]:
+                        if pkt.haslayer(TCP) and pkt["TCP"].sport != int(OutRules[i]["TCPsport"]):
                             alt.append(pkt)
                         elif not pkt.haslayer(TCP):
                             alt.append(pkt)
@@ -440,7 +440,7 @@ if (args.FILTER is not None) and (args.MAC is not None):
             if temp == []:
                 for pkt in pcap:
                     if isOutgoing(pkt):
-                        if pkt.haslayer(ICMP) and (pkt["ICMP"].code != OutRules[i]["icmp"]):
+                        if pkt.haslayer(ICMP) and (pkt["ICMP"].code != int(OutRules[i]["icmp"])):
                             temp.append(pkt)
                         elif not pkt.haslayer(ICMP):
                             temp.append(pkt)
@@ -448,7 +448,7 @@ if (args.FILTER is not None) and (args.MAC is not None):
             else:
                 for pkt in temp:
                     if isOutgoing(pkt):
-                        if pkt.haslayer(ICMP) and pkt["ICMP"].code != OutRules[i]["icmp"]:
+                        if pkt.haslayer(ICMP) and pkt["ICMP"].code != int(OutRules[i]["icmp"]):
                             alt.append(pkt)
                         elif not pkt.haslayer(ICMP):
                             alt.append(pkt)

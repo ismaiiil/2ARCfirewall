@@ -1,1 +1,1 @@
-[{"default": "empty"}, {"UDPsport": "58837"}, {"icmp": 0}, {"UDPdport": 58373}, {"dst_ip": "52.20.100.49"}, {"UDPdport": 63630}, {"src_ip": "52.20.100.49"}, {"UDPdport": 65129}, {"UDPsport": 63630}, {"TCPdport": 80}]
+[{"default": "empty"}, {"UDPsport": 58837}, {"icmp": 0}, {"UDPdport": 58373}, {"dst_ip": "52.20.100.49"}, {"UDPdport": 63630}, {"src_ip": "52.20.100.49"}, {"UDPdport": 65129}, {"UDPsport": 63630}, {"TCPdport": 80}, {"icmp": "0"}]
