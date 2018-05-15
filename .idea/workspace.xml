@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ac8e309e-341c-4b49-94cc-0fd2bb624467" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TODO arc.txt" afterPath="$PROJECT_DIR$/TODO arc.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core.py" afterPath="$PROJECT_DIR$/core.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/filtered.pcap" afterPath="$PROJECT_DIR$/filtered.pcap" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/in_rules" afterPath="$PROJECT_DIR$/in_rules" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out_rules" afterPath="$PROJECT_DIR$/out_rules" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -36,22 +34,25 @@
         <entry file="file://$PROJECT_DIR$/in_rules">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
-              <caret line="0" column="41" lean-forward="false" selection-start-line="0" selection-start-column="41" selection-end-line="0" selection-end-column="41" />
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="core.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="core.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2858">
-              <caret line="450" column="94" lean-forward="false" selection-start-line="450" selection-start-column="94" selection-end-line="450" selection-end-column="94" />
+            <state relative-caret-position="116">
+              <caret line="88" column="46" lean-forward="false" selection-start-line="88" selection-start-column="46" selection-end-line="88" selection-end-column="46" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
                 <element signature="e#1248#1524#0" expanded="false" />
                 <element signature="e#1577#1875#0" expanded="false" />
                 <element signature="e#2170#2367#0" expanded="false" />
+                <element signature="e#2903#19067#0" expanded="false" />
+                <element signature="e#3365#11118#0" expanded="false" />
+                <element signature="e#11230#18930#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -67,11 +68,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TODO arc.txt" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TODO arc.txt" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/TODO arc.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="22" column="76" lean-forward="false" selection-start-line="22" selection-start-column="76" selection-end-line="22" selection-end-column="76" />
+            <state relative-caret-position="240">
+              <caret line="18" column="29" lean-forward="true" selection-start-line="18" selection-start-column="29" selection-end-line="18" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -124,10 +125,10 @@
         <option value="$PROJECT_DIR$/rules" />
         <option value="$PROJECT_DIR$/filtered.pcap" />
         <option value="$PROJECT_DIR$/manual.txt" />
-        <option value="$PROJECT_DIR$/TODO arc.txt" />
         <option value="$PROJECT_DIR$/out_rules" />
         <option value="$PROJECT_DIR$/in_rules" />
         <option value="$PROJECT_DIR$/core.py" />
+        <option value="$PROJECT_DIR$/TODO arc.txt" />
       </list>
     </option>
   </component>
@@ -415,6 +416,9 @@
             <element signature="e#1248#1524#0" expanded="false" />
             <element signature="e#1577#1875#0" expanded="false" />
             <element signature="e#2170#2367#0" expanded="false" />
+            <element signature="e#2903#19067#0" expanded="false" />
+            <element signature="e#3365#11118#0" expanded="false" />
+            <element signature="e#11230#18930#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -428,6 +432,9 @@
             <element signature="e#1248#1524#0" expanded="false" />
             <element signature="e#1577#1875#0" expanded="false" />
             <element signature="e#2170#2367#0" expanded="false" />
+            <element signature="e#2903#19067#0" expanded="false" />
+            <element signature="e#3365#11118#0" expanded="false" />
+            <element signature="e#11230#18930#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -486,6 +493,9 @@
             <element signature="e#1248#1524#0" expanded="false" />
             <element signature="e#1577#1875#0" expanded="false" />
             <element signature="e#2170#2367#0" expanded="false" />
+            <element signature="e#2903#19067#0" expanded="false" />
+            <element signature="e#3365#11118#0" expanded="false" />
+            <element signature="e#11230#18930#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -523,6 +533,9 @@
             <element signature="e#1248#1524#0" expanded="false" />
             <element signature="e#1577#1875#0" expanded="false" />
             <element signature="e#2170#2367#0" expanded="false" />
+            <element signature="e#2903#19067#0" expanded="false" />
+            <element signature="e#3365#11118#0" expanded="false" />
+            <element signature="e#11230#18930#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -560,6 +573,9 @@
             <element signature="e#1248#1524#0" expanded="false" />
             <element signature="e#1577#1875#0" expanded="false" />
             <element signature="e#2170#2367#0" expanded="false" />
+            <element signature="e#2903#19067#0" expanded="false" />
+            <element signature="e#3365#11118#0" expanded="false" />
+            <element signature="e#11230#18930#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -597,6 +613,9 @@
             <element signature="e#1248#1524#0" expanded="false" />
             <element signature="e#1577#1875#0" expanded="false" />
             <element signature="e#2170#2367#0" expanded="false" />
+            <element signature="e#2903#19067#0" expanded="false" />
+            <element signature="e#3365#11118#0" expanded="false" />
+            <element signature="e#11230#18930#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -634,6 +653,9 @@
             <element signature="e#1248#1524#0" expanded="false" />
             <element signature="e#1577#1875#0" expanded="false" />
             <element signature="e#2170#2367#0" expanded="false" />
+            <element signature="e#2903#19067#0" expanded="false" />
+            <element signature="e#3365#11118#0" expanded="false" />
+            <element signature="e#11230#18930#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -647,6 +669,9 @@
             <element signature="e#1248#1524#0" expanded="false" />
             <element signature="e#1577#1875#0" expanded="false" />
             <element signature="e#2170#2367#0" expanded="false" />
+            <element signature="e#2903#19067#0" expanded="false" />
+            <element signature="e#3365#11118#0" expanded="false" />
+            <element signature="e#11230#18930#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -722,6 +747,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/out_rules">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="45" lean-forward="false" selection-start-line="0" selection-start-column="44" selection-end-line="0" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/manual.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
@@ -738,40 +771,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TODO arc.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="22" column="76" lean-forward="false" selection-start-line="22" selection-start-column="76" selection-end-line="22" selection-end-column="76" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/in_rules">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="41" lean-forward="false" selection-start-line="0" selection-start-column="41" selection-end-line="0" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/out_rules">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="45" lean-forward="false" selection-start-line="0" selection-start-column="44" selection-end-line="0" selection-end-column="45" />
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2858">
-          <caret line="450" column="94" lean-forward="false" selection-start-line="450" selection-start-column="94" selection-end-line="450" selection-end-column="94" />
+        <state relative-caret-position="116">
+          <caret line="88" column="46" lean-forward="false" selection-start-line="88" selection-start-column="46" selection-end-line="88" selection-end-column="46" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
             <element signature="e#1248#1524#0" expanded="false" />
             <element signature="e#1577#1875#0" expanded="false" />
             <element signature="e#2170#2367#0" expanded="false" />
+            <element signature="e#2903#19067#0" expanded="false" />
+            <element signature="e#3365#11118#0" expanded="false" />
+            <element signature="e#11230#18930#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TODO arc.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="18" column="29" lean-forward="true" selection-start-line="18" selection-start-column="29" selection-end-line="18" selection-end-column="29" />
+          <folding />
         </state>
       </provider>
     </entry>

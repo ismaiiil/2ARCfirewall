@@ -1,7 +1,7 @@
 1.read a .cap file
 	-The program can parse rules in a natural language.
 	filter by ip
-	filter by protocol(TCP,UDP,DNS) //TODO find ways to get more protocols
+	filter by protocol(TCP,UDP,ICMP code)
 2.based on filter logic, example, ip , protocol, etc, add a new list of packets to a new
 pcap file
 
@@ -20,4 +20,4 @@ with exe: filter -t arg1 -s arg2 (plus user doesnt need to have installed python
 
 TODO mac address filtering is not possible with PYdivert, for now...
 
-TODO unknown bugs may still remain in the outbound-inbound logic implemented
+TODO plug python app into windows os withotu the need to install python or packages on target machine

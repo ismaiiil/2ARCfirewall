@@ -87,8 +87,6 @@ if args.DISPLAY == "table":
     print("OUTBOUND rules: \n")
     for i in range(1, len(OutRules)):
         print(str(i) + " " + str(OutRules[i]))
-
-
 if (args.FILTER is not None) and (args.MAC is not None):
     pcap = rdpcap(args.FILTER)  # user input path to cap file
     mac = args.MAC
