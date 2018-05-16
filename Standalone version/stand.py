@@ -13,6 +13,23 @@ parser = argparse.ArgumentParser(description='Assigns a keyword rule to a value'
 my_dict = {}
 
 
+def display():
+    global InRules, i, OutRules
+    get_inrules = open("in_rules")
+    InRules = json.load(get_inrules)
+    get_inrules.close()
+    print("INBOUND rules: \n")
+    for i in range(1, len(InRules)):
+        print(str(i) + " " + str(InRules[i]))
+    print("\n")
+    get_outrules = open("out_rules")
+    OutRules = json.load(get_outrules)
+    get_outrules.close()
+    print("OUTBOUND rules: \n")
+    for i in range(1, len(OutRules)):
+        print(str(i) + " " + str(OutRules[i]))
+
+
 class StoreDictKeyPair(argparse.Action):
     def __call__(self, parser, namespace, values, option_string=None):
         for kv in values.split(","):
@@ -43,6 +60,7 @@ if (args.DELETE is not None) and args.INBOUND:
     f = open("in_rules", 'w')
     json.dump(loadedRules, f)
     f.close()
+    display()
 if (args.DELETE is not None) and args.OUTBOUND:
     get_rules = open("out_rules")
     loadedRules = json.load(get_rules)
@@ -54,6 +72,7 @@ if (args.DELETE is not None) and args.OUTBOUND:
     f = open("out_rules", 'w')
     json.dump(loadedRules, f)
     f.close()
+    display()
 if (args.ADD is not None) and args.INBOUND:
     get_rules = open("in_rules")
     loadedRules = json.load(get_rules)
@@ -63,6 +82,7 @@ if (args.ADD is not None) and args.INBOUND:
     f = open("in_rules", 'w')
     json.dump(loadedRules, f)
     f.close()
+    display()
 if (args.ADD is not None) and args.OUTBOUND:
     get_rules = open("out_rules")
     loadedRules = json.load(get_rules)
@@ -71,22 +91,9 @@ if (args.ADD is not None) and args.OUTBOUND:
     f = open("out_rules", 'w')
     json.dump(loadedRules, f)
     f.close()
+    display()
 if args.DISPLAY == "table":
-    get_inrules = open("in_rules")
-    InRules = json.load(get_inrules)
-    get_inrules.close()
-
-    print("INBOUND rules: \n")
-    for i in range(1, len(InRules)):
-        print(str(i) + " " + str(InRules[i]))
-
-    print("\n")
-    get_outrules = open("out_rules")
-    OutRules = json.load(get_outrules)
-    get_outrules.close()
-    print("OUTBOUND rules: \n")
-    for i in range(1, len(OutRules)):
-        print(str(i) + " " + str(OutRules[i]))
+    display()
 if (args.FILTER is not None) and (args.MAC is not None):
     pcap = rdpcap(args.FILTER)  # user input path to cap file
     mac = args.MAC

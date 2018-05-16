@@ -21,6 +21,6 @@ this will output all rules stored to rules JSON files
 --FILTER:
 Filter file pointed by path input by user:
 example:
-input: python core.py --FILTER C:\Users\USER\Desktop\waza.pcapng --MAC c8:ff:28:2c:71:d7 ## used --MAC to sepcify the interface
+input: python stand.py --FILTER C:\Users\USER\Desktop\waza.pcapng --MAC c8:ff:28:2c:71:d7 ## used --MAC to sepcify the interface
 on which the capture file was captured
 
