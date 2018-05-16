@@ -1,1 +1,1 @@
-[{"default": "empty"}, {"UDPsport": "58837"}]
+[{"default": "empty"}, {"UDPsport": "58837"},{"TCPsport":"3306"}]
