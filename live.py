@@ -101,7 +101,7 @@ if args.START:
     OutRules = json.load(h)
     h.close()
 
-    print("test")
+    print("FIREWALL STARTED")
 
     with pydivert.WinDivert() as w:
         for packet in w:
