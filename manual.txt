@@ -3,24 +3,30 @@ options:
 --ADD:
 choose from these rules: src_ip,dst_ip,TCPsport,UDPsport,TCPdport,TCPdport,dst_MAC,src_MAC,icmp
 example:
-input: python core.py --ADD src_ip=192.168.0.2 -in ##(used -in to add this to the in_rules JSON file)
+input: python stand.py --ADD src_ip=192.168.0.2 -in ##(used -in to add this to the in_rules JSON file)
 this will add the rule src_ip=192.168.0.2 to the rule JSON file
 
 --DELETE:
 delete a rule by index:
 example:
-input: python core.py --DELETE 1 -out ##(used -out to delete from the out_rules table)
+input: python stand.py --DELETE 1 -out ##(used -out to delete from the out_rules table)
 this will delete rule with index 1
 
 --DISPLAY:
 display table:
 example:
-input: python core.py --DISPLAY table
+input: python stand.py --DISPLAY table
 this will output all rules stored to rules JSON files
 
 --FILTER:
 Filter file pointed by path input by user:
 example:
-input: python core.py --FILTER C:\Users\USER\Desktop\waza.pcapng --MAC c8:ff:28:2c:71:d7 ## used --MAC to sepcify the interface
+input: python stand.py --FILTER C:\Users\USER\Desktop\waza.pcapng --MAC c8:ff:28:2c:71:d7 ## used --MAC to sepcify the interface
 on which the capture file was captured
+
+--START:
+Filter network in realtime:
+example:
+input: python stand.py --START
+will filter network based on rules stored in in_rules and out_rules
 
